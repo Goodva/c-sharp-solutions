@@ -22,7 +22,6 @@ int square_sum(int[] a){
     int c = Convert.ToInt32(b);
     return c;
 }
-
 const int n = 3;
 int[] array = new int [n];
 for(int i = 0; i < n; i++)
@@ -46,12 +45,10 @@ int[] func(int a, int b)
     }
     return ar;
 }
-
 Console.WriteLine("Введите первое число: ");
 int a = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите второе число: ");
 int b = Convert.ToInt32(Console.ReadLine());
-
 int[] array = func(a,b);
 Console.Write($"Mассив первых {b} множителей числа {a}: (");
 for(int i = 0; i < array.Length; i++)
@@ -70,7 +67,6 @@ int[] reverse_order(int a){
     }
     return b;
 }
-
 Console.Write("Введите число: ");
 int n = Convert.ToInt32(Console.ReadLine());
 int[] array = reverse_order(n);
@@ -85,15 +81,12 @@ int sum_between(int a, int b)
     if(a == b) return a;
     else if(a > b){ for(int i = b; i <= a; i++) sum += i; }
     else { for(int i = a; i <= b; i++) sum += i;}
-
     return sum;
 }
-
 Console.Write("Введите первое число: ");
 int a = Convert.ToInt32(Console.ReadLine());
 Console.Write("Введите второе число: ");
 int b = Convert.ToInt32(Console.ReadLine());
-
 Console.Write($"сумма чисел от {a} до {b} включительно равна {sum_between(a,b)}");
 */
 
@@ -107,7 +100,6 @@ int some_summ(int n)
     }
     return summ;
 }
-
 int check = 0;
 int a = 0;
 while(check != 1)
@@ -120,7 +112,7 @@ while(check != 1)
 Console.WriteLine($"Сумма всех множителей 3 и 5 от 1 до {a} равна {some_summ(a)}.");
 */
 
- //////////////// 6
+/* //////////////// 6
 int vek(int a)
 {
     int b = (a - a % 100)/100;
@@ -140,3 +132,62 @@ while(check != 1)
 }
 
 Console.WriteLine($"{a} год пренадлежит {vek(a)} веку.");
+*/
+
+//25.11.22
+
+//int a = 5, b = 7; //тернарная операция
+//int c = a > b ? a : b;
+/* //////////////// 1
+Console.Write("Введите число: ");
+int a = Convert.ToInt32(Console.ReadLine());
+
+int b = 0, i = 0;
+
+if(a == 1) b = 1;
+else if (a > 1)
+{
+    
+    while(i != a)
+    {
+        b += i;
+        i++;
+    } 
+}
+else
+{
+    
+    while (i != a)
+    {
+        b += i;
+        i--;
+    } 
+}
+Console.WriteLine($"Сумма от 1 до {a} равна {b}.");
+*/
+
+/* //////////////// 2
+int count = 0, summ = 0, input = 0;
+do{
+    Console.Write("Введите число:");
+    input = Convert.ToInt32(Console.ReadLine());
+    count++;
+    summ += input;
+    if(input == 0){ 
+        count--;
+        break;
+    }
+}while(true);
+
+Console.WriteLine($"Сумма введеных чисел: {summ}; Кол-во введеных чисел: {count}.");
+*/
+
+ //////////////// 3
+int a;
+do{
+    Console.Write("Введите число: ");
+    a = Convert.ToInt32(Console.ReadLine());
+    if(a > 0 && a < 100) break;
+    else Console.Write("Неверное число. ");
+}while(true);
+Console.WriteLine("Число введено правильно.");
