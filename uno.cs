@@ -1,7 +1,7 @@
 using System;
 // нихуя не дорогой мне второкурсник, если тронеш этот файл я тебе точно руки в жопу засуну
 
-void print_array(int[] a)
+void print_array(int[] a) // высирание массива int в консоль
 {
     Console.Write("(");
     for(int i = 0; i < a.Length; i++)
@@ -10,6 +10,26 @@ void print_array(int[] a)
         else Console.Write($"{a[i]}, ");
     }
 }
+
+int[] bubble(int[] a) // сортировка пузырьcum
+{
+    int[] sorted = a;
+    int temp = 0;
+    for(int i = 0; i < a.Length; i++)
+    {
+        for(int j = 0; j < a.Length - 1; j++)
+        {
+            if(sorted[j] > sorted[j+1])
+            {
+                temp = sorted[j+1];
+                sorted[j+1] = sorted[j];
+                sorted[j] = temp;
+            }
+        }
+    }
+    return sorted;
+}
+Random rng = new Random();
 // 24.11.22
 /* //////////////// 1
 int square_sum(int[] a){
@@ -182,7 +202,7 @@ do{
 Console.WriteLine($"Сумма введеных чисел: {summ}; Кол-во введеных чисел: {count}.");
 */
 
- //////////////// 3
+/* //////////////// 3
 int a;
 do{
     Console.Write("Введите число: ");
@@ -191,3 +211,75 @@ do{
     else Console.Write("Неверное число. ");
 }while(true);
 Console.WriteLine("Число введено правильно.");
+*/
+
+// 02.12.22
+// foreach(int i in Array)
+//{
+//  Console.WriteLine(i)
+//}
+
+// 09.12.22
+//////////////// 1
+// создайте массив и найдите все положительные числа
+
+/*
+Console.Write("Введите размер рандомного массива: ");
+int n = Convert.ToInt32(Console.ReadLine());
+
+int a = 0;
+int[] arr = new int[n];
+
+for(int i = 0; i < n; i++)
+{
+    arr[i] = rng.Next(-100,100);
+    if(arr[i] >= 0) a++;
+}
+
+Console.Write($"массив, рамера {n} из чисел от -100 до 100: ");
+print_array(arr);
+Console.Write($", где {a} чисел - положительные.");
+
+*/
+
+ //////////////// 2
+//создайте массив и инвертируете его ежжи
+
+/*
+Console.Write("Введите размер рандомного массива: ");
+int n = Convert.ToInt32(Console.ReadLine());
+
+int[] arr = new int[n];
+int[] rra = new int[n]; // инвертнутый массив ежжи
+
+for(int i = 0; i < n; i++)
+{
+    arr[i] = rng.Next(-100,100);
+    rra[n - 1 - i] = arr[i];
+}
+Console.Write($"массив, рамера {n} из чисел от -100 до 100: ");
+print_array(arr);
+Console.Write(";\nинвертированый массив arr: ");
+print_array(rra);
+
+*/
+
+ //////////////// 3
+/* сортировка массива guh?
+
+Console.Write("Введите размер рандомного массива: ");
+int n = Convert.ToInt32(Console.ReadLine());
+
+int[] arr = new int[n];
+int[] arr_sorted = new int[n]; // сортированый массив ежжи
+
+for(int i = 0; i < n; i++){ arr[i] = rng.Next(-100,100); }
+
+Console.Write($"массив, рамера {n} из чисел от -100 до 100: ");
+print_array(arr);
+
+arr_sorted = bubble(arr);
+Console.Write("\nОтсортированый массив:");
+print_array(arr_sorted);
+
+*/
