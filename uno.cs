@@ -29,6 +29,39 @@ int[] bubble(int[] a) // сортировка пузырьcum
     }
     return sorted;
 }
+
+int[] quicksort(int[] a, int leftmost, int rightmost) 
+//быстрая сортировка, прикинь, leftmost - самый левый индекс нужного массива,
+// rightmost - самый правый индекс. 
+//эта залупа кст рекурсивная так что поэтому нам эти бибы и бобы нужны
+{
+    int[] sorted = a;//массив на вывод
+    //int temp = 0;
+    int i = leftmost, j = rightmost;//i - первое число, j - предпоследнее, т.к мы берем последнее число для pivot'a
+    int pivot = sorted[j]; // наше пиво(t)
+
+    while(i <= j)
+    {
+        while(sorted[i]<pivot) i++;
+        while(sorted[j]>pivot) j--;
+
+        if(i <= j)
+        {
+            int temp = sorted[i];
+            sorted[i] = sorted[j];
+            sorted[j] = temp;
+            i++; j--;
+        }
+    }
+
+    if(j > leftmost)
+        quicksort(sorted,leftmost,j);
+    
+    if(i < rightmost)
+        quicksort(sorted,i,rightmost);
+    
+    return sorted;
+}
 Random rng = new Random();
 // 24.11.22
 /* //////////////// 1
@@ -283,3 +316,22 @@ Console.Write("\nОтсортированый массив:");
 print_array(arr_sorted);
 
 */
+
+// 18.01.23
+//////////////// 1
+// сортировка пиво(м)том
+
+Console.Write("Введите размер рандомного массива: ");
+int n = Convert.ToInt32(Console.ReadLine());
+
+int[] arr = new int[n];
+int[] arr_sorted = new int[n]; // массив куда будет отсортировываться сгенерированая залупа
+
+for(int i = 0; i < n; i++){ arr[i] = rng.Next(-100,100); }
+
+Console.Write($"массив, рамера {n} из чисел от -100 до 100: ");
+print_array(arr);
+
+arr_sorted = quicksort(arr,0,arr.Length-1);
+Console.Write("\nОтсортированый массив:");
+print_array(arr_sorted);
