@@ -11,6 +11,16 @@ void print_array(int[] a) // высирание массива int в консо
     }
 }
 
+void print_char(char[] a) // высирание массива char в консоль
+{
+    Console.Write("(");
+    for(int i = 0; i < a.Length; i++)
+    {
+        if(i == a.Length - 1) Console.Write($"{a[i]})");
+        else Console.Write($"{a[i]}, ");
+    }
+}
+
 int[] bubble(int[] a) // сортировка пузырьcum
 {
     int[] sorted = a;
@@ -32,15 +42,14 @@ int[] bubble(int[] a) // сортировка пузырьcum
 
 int[] quicksort(int[] a, int leftmost, int rightmost) 
 //быстрая сортировка, прикинь, leftmost - самый левый индекс нужного массива,
-// rightmost - самый правый индекс. 
-//эта залупа кст рекурсивная так что поэтому нам эти бибы и бобы нужны
+// rightmost - самый правый индекс. эти две херовены нужны потомучто функция - рекурсивная,
+// т.е. функция сама себя вызывает
 {
-    int[] sorted = a;//массив на вывод
-    //int temp = 0;
+    int[] sorted = a;//массив на вывод//int temp = 0;
     int i = leftmost, j = rightmost;//i - первое число, j - предпоследнее, т.к мы берем последнее число для pivot'a
-    int pivot = sorted[j]; // наше пиво(t)
+    int pivot = sorted[j]; // наше пиво(t), идет на вывод
 
-    while(i <= j)
+    while(i <= j) // сам акт сортировки, тут я разбирать эту залупу не буду, см. в википедии
     {
         while(sorted[i]<pivot) i++;
         while(sorted[j]>pivot) j--;
@@ -321,17 +330,87 @@ print_array(arr_sorted);
 //////////////// 1
 // сортировка пиво(м)том
 
-Console.Write("Введите размер рандомного массива: ");
-int n = Convert.ToInt32(Console.ReadLine());
+// Console.Write("Введите размер рандомного массива: ");
+// int n = Convert.ToInt32(Console.ReadLine());
 
-int[] arr = new int[n];
-int[] arr_sorted = new int[n]; // массив куда будет отсортировываться сгенерированая залупа
+// int[] arr = new int[n];
+// int[] arr_sorted = new int[n]; // массив куда будет отсортировываться сгенерированая залупа
 
-for(int i = 0; i < n; i++){ arr[i] = rng.Next(-100,100); }
+// for(int i = 0; i < n; i++){ arr[i] = rng.Next(-100,100); }
 
-Console.Write($"массив, рамера {n} из чисел от -100 до 100: ");
-print_array(arr);
+// Console.Write($"массив, рамера {n} из чисел от -100 до 100: ");
+// print_array(arr);
 
-arr_sorted = quicksort(arr,0,arr.Length-1);
-Console.Write("\nОтсортированый массив:");
-print_array(arr_sorted);
+// arr_sorted = quicksort(arr,0,arr.Length-1);
+// Console.Write("\nОтсортированый массив:");
+// print_array(arr_sorted);
+
+// 20.01.23
+//////////////// 1
+// сравнение с нулем
+
+// Console.Write("Введите число: ");
+// int n = Convert.ToInt32(Console.ReadLine());
+
+// if(n > 0) Console.WriteLine("Введеное число больше нуля.");
+// else if(n < 0) Console.WriteLine("Введеное число меньше нуля.");
+// else Console.WriteLine("Введеное число равно нулю.");
+
+//////////////// 2
+// проверка строчки на полиндром 
+// без учета пробелов и регистров
+
+// Console.Write("Введите слово или предложение(кириллицу не видит): ");
+// string a = Convert.ToString(Console.ReadLine());
+
+// a = a.ToLower(); // весь регистр строки сносим нахой
+// a = a.Replace(" ", ""); // вынос пробелов из строки
+
+// char[] arr = a.ToCharArray(); char[] rra = arr;
+// Array.Reverse(rra); 
+
+// if(arr == rra) Console.WriteLine("Введеное является полиндромом.");
+// else Console.WriteLine("Введеное не является полиндромом.");
+    
+// print_char(arr); Console.Write(", "); print_char(rra);
+
+//////////////// 3
+// Вывести на экран, консольного приложения, прямоугольный треугольник из звездочек “*”, с длиной катета a. Использовать вложенные циклы.
+
+// Console.Write("Введите катет прямоугольного треугольника(длина стороны крч): ");
+// int a = Convert.ToInt32(Console.ReadLine());
+
+// for(int i = 1; i <= a; i++)
+// {
+//     if(i == 1 || i == a)
+//     {
+//         for(int j = 1; j <= i; j++)
+//         {
+//             Console.Write("*");
+//             if(j == i) Console.Write("\n");
+//         }
+//     }
+//     else
+//     {
+//         Console.Write("*");
+//         for(int j = 2; j < i; j++) Console.Write(" ");
+//         Console.Write("*\n");
+//     }
+// }
+
+//////////////// 4
+// Дано три различных числа a, b, c. Вывести среднее из них.
+
+int[] a = new int[3];
+Console.WriteLine("Введите 3 числа:");
+for(int i = 0; i < 3; i++)
+{
+    Console.Write($"Введите {i+1}е число: ");
+    a[i] = Convert.ToInt32(Console.ReadLine());
+}
+
+if(a[0] == a[1] || a[1] == a[2] || a[0] == a[2]) Console.WriteLine("Двое или все из введеных чисел равны, среднего нет.");
+else {
+    a = bubble(a);
+    Console.WriteLine($"Средним числом является {a[1]}.");
+}
