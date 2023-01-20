@@ -410,16 +410,98 @@ print_array(arr_sorted);
 //////////////// 4
 // Дано три различных числа a, b, c. Вывести среднее из них.
 
-int[] a = new int[3];
-Console.WriteLine("Введите 3 числа:");
-for(int i = 0; i < 3; i++)
+// int[] a = new int[3];
+// Console.WriteLine("Введите 3 числа:");
+// for(int i = 0; i < 3; i++)
+// {
+//     Console.Write($"Введите {i+1}е число: ");
+//     a[i] = Convert.ToInt32(Console.ReadLine());
+// }
+
+// if(a[0] == a[1] || a[1] == a[2] || a[0] == a[2]) Console.WriteLine("Двое или все из введеных чисел равны, среднего нет.");
+// else {
+//     a = bubble(a);
+//     Console.WriteLine($"Средним числом является {a[1]}.");
+// }
+
+//protip:
+//double b = 16.2;
+//вместо 
+//  int a = Convert.ToInt32(b);
+//можно написать
+//  int a = (int)b;
+
+//////////////// доп. задача, чисто для меня и демидова
+// Перетасовка Ханафуда
+
+int n; // размер колоды
+while(true)
 {
-    Console.Write($"Введите {i+1}е число: ");
-    a[i] = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Введите размер колоды (1 <= n <= 50): ");
+    n = Convert.ToInt32(Console.ReadLine());
+    if(1 <= n && n <= 50) break;
+    else Console.WriteLine("Размер введенной колоды уходит за заданные гранницы");
 }
 
-if(a[0] == a[1] || a[1] == a[2] || a[0] == a[2]) Console.WriteLine("Двое или все из введеных чисел равны, среднего нет.");
-else {
-    a = bubble(a);
-    Console.WriteLine($"Средним числом является {a[1]}.");
+int r;
+while(true)
+{
+    Console.Write("Введите кол-во срезов (1 <= r <= 50): ");
+    r = Convert.ToInt32(Console.ReadLine());
+    if(1 <= r && r <= 50) break;
+    else Console.WriteLine("Кол-во срезов уходит за заданные гранницы");
+}
+
+int p; //с какой карты сверху начнется срез
+while(true)
+{
+    Console.Write($"Введите с какой карты снизу начнется срез (1 <= p <= {n}, где 1 - дно колоды): ");
+    p = Convert.ToInt32(Console.ReadLine());
+    if(1 <= p && p <= n) break;
+    else Console.WriteLine("Номер карты уходит за заданные гранницы");
+}
+
+int c; //кол-во карт в срезе
+while(true)
+{
+    Console.Write($"Введите кол-во карт в срезе (1 <= c <= {p}): ");
+    c = Convert.ToInt32(Console.ReadLine());
+    if(1 <= c && c <= n-p) break;
+    else Console.WriteLine("Кол-во карт уходит за заданные гранницы");
+}
+
+// Console.WriteLine($"n = {n}, r = {r}, p = {p}, c = {c}.");
+
+//n - размер, r - кол-во срезов, p - с какой карты сверху идет срез, c - кол-во карт в срезе
+
+int[] deck = new int[n]; // наша колода
+for(int i = 0; i < n; i++) deck[i] = i+1; // заполнение колоды
+
+int[] cut = new int[c]; // массив для среза
+int[] offset = new int[n-p]; // массив для перестановки сверху на место среза
+
+Console.WriteLine("Колода выглядит так: ");
+print_array(deck);
+Console.Write($", где 1 - дно колоды, {n} - верхушка.\n");
+Console.Write("=================================");
+
+int k = 0; // индекс для записи в сut и offset
+
+for(int i = 0; i < r; i++) // сам цикл, циклицться по кол-ву срезов(очевидно)
+{   
+    for(int j = p - c ; j < p ; j++) // запись в cut, снизу вверх
+    {
+        cut[k] = deck[j];
+        k++;
+    }
+    k = 0;
+    Console.Write($"\ncut {i+1} "); print_array(cut);
+
+    for(int j = p; j <= n-1; j++) // запись в offset, тоже снизу вверх
+    {
+        offset[k] = deck[j];
+        k++;
+    }
+    k = 0;
+    Console.Write($"\noffset "); print_array(offset);
 }
