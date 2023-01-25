@@ -6,7 +6,64 @@ void print_array(int[] a) // высирание массива int в консо
     Console.Write("(");
     for(int i = 0; i < a.Length; i++)
     {
-        if(i == a.Length - 1) Console.Write($"{a[i]})");
+        if(i == a.Length - 1) Console.Write($"{a[i]})\n");
+        else Console.Write($"{a[i]}, ");
+    }
+}
+
+void print_shit(int[,] a) // залупный вывод 2Д массива, мне нужно не совсем это
+{
+    int rows = a.GetUpperBound(0) + 1;
+    int colums = a.Length / rows;
+
+    for(int i = 0; i < rows; i++)
+    {
+        for(int j = 0; j < colums; j++)
+        {
+            Console.Write($"{a[i,j]}");
+        }
+        Console.WriteLine();
+    }
+}
+
+void print_2d_array(int[,] a)
+{
+    int rows = a.GetUpperBound(0) + 1;
+    int colums = a.Length / rows;
+
+    for(int i = 0; i < colums; i++)
+    {
+        Console.Write("[");
+        for(int j = 0; j < rows; j++)
+        {
+            if(j == rows - 1) Console.Write($"{a[j,i]}");
+            else Console.Write($"{a[j,i]}, ");
+        }
+        Console.WriteLine("]");
+    }
+}
+
+void print_jagged_r(int[][] a) // высирание зубчатого прямоугольного массива, повернув его на 90град. на лево, мне так надо
+{
+    int b = a[0].Length;
+    for (int i = 0; i < b;i++)
+    {
+        Console.Write("[");
+        for (int j = 0; j < a.Length; j++)
+        {
+            if(j == a.Length - 1) Console.Write($"{a[j][i]}");
+            else Console.Write($"{a[j][i]}, ");
+        }
+        Console.WriteLine("]");
+    }   
+}
+
+void print_long(long[] a) // высирание массива long в консоль
+{
+    Console.Write("(");
+    for(int i = 0; i < a.Length; i++)
+    {
+        if(i == a.Length - 1) Console.Write($"{a[i]})\n");
         else Console.Write($"{a[i]}, ");
     }
 }
@@ -16,9 +73,25 @@ void print_char(char[] a) // высирание массива char в конс�
     Console.Write("(");
     for(int i = 0; i < a.Length; i++)
     {
-        if(i == a.Length - 1) Console.Write($"{a[i]})");
+        if(i == a.Length - 1) Console.Write($"{a[i]})\n");
         else Console.Write($"{a[i]}, ");
     }
+}
+
+void print_string_arr(string[] a) // высирание массива string в консоль
+{
+    Console.Write("(");
+    for(int i = 0; i < a.Length; i++)
+    {
+        if(i == a.Length - 1) Console.Write($"{a[i]})\n");
+        else Console.Write($"{a[i]}, ");
+    }
+}
+
+void print_string(string a)
+{
+    char[] b = a.ToCharArray();
+    print_char(b);
 }
 
 int[] bubble(int[] a) // сортировка пузырьcum
@@ -434,90 +507,150 @@ print_array(arr_sorted);
 //////////////// доп. задача, чисто для меня и демидова
 // Перетасовка Ханафуда
 
-int n; // размер колоды
-while(true)
-{
-    Console.Write("Введите размер колоды (1 <= n <= 50): ");
+// int n; // размер колоды
+// while(true)
+// {
+//     Console.Write("Введите размер колоды (1 <= n <= 50): ");
+//     n = Convert.ToInt32(Console.ReadLine());
+//     if(1 <= n && n <= 50) break;
+//     else Console.WriteLine("Размер введенной колоды уходит за заданные гранницы");
+// }
+
+// int r;
+// while(true)
+// {
+//     Console.Write("Введите кол-во срезов (1 <= r <= 50): ");
+//     r = Convert.ToInt32(Console.ReadLine());
+//     if(1 <= r && r <= 50) break;
+//     else Console.WriteLine("Кол-во срезов уходит за заданные гранницы");
+// }
+
+// int p; //с какой карты сверху начнется срез
+// while(true)
+// {
+//     Console.Write($"Введите с какой карты снизу начнется срез (1 <= p <= {n}, где 1 - дно колоды): ");
+//     p = Convert.ToInt32(Console.ReadLine());
+//     if(1 <= p && p <= n) break;
+//     else Console.WriteLine("Номер карты уходит за заданные гранницы");
+// }
+
+// int c; //кол-во карт в срезе
+// while(true)
+// {
+//     Console.Write($"Введите кол-во карт в срезе (1 <= c <= {p}): ");
+//     c = Convert.ToInt32(Console.ReadLine());
+//     if(1 <= c && c <= n-p) break;
+//     else Console.WriteLine("Кол-во карт уходит за заданные гранницы");
+// }
+
+// // Console.WriteLine($"n = {n}, r = {r}, p = {p}, c = {c}.");
+
+// //n - размер, r - кол-во срезов, p - с какой карты сверху идет срез, c - кол-во карт в срезе
+
+// int[] deck = new int[n]; // наша колода
+// for(int i = 0; i < n; i++) deck[i] = i+1; // заполнение колоды
+
+// int[] cut = new int[c]; // массив для среза
+// int[] offset = new int[n-p]; // массив для перестановки сверху на место среза
+
+// Console.WriteLine("Колода выглядит так: ");
+// print_array(deck);
+// Console.Write($", где 1 - дно колоды, {n} - верхушка.\n");
+// Console.Write("=================================");
+
+// int k = 0; // индекс для записи в сut и offset
+
+// for(int i = 0; i < r; i++) // сам цикл, циклицться по кол-ву срезов(очевидно)
+// {   
+//     for(int j = p - c ; j < p ; j++) // запись в cut, снизу вверх
+//     {
+//         cut[k] = deck[j];
+//         k++;
+//     }
+//     k = 0;
+//     //Console.Write($"\ncut {i+1} "); print_array(cut);
+
+//     for(int j = p; j <= n-1; j++) // запись в offset, тоже снизу вверх
+//     {
+//         offset[k] = deck[j];
+//         k++;
+//     }
+//     int o = p - c;
+//     //Console.Write($"\noffset "); print_array(offset);
+
+//     for(k = 0; k < offset.Length; k++) // перепись самой колоды(перетасовка), запись карты выше среза вниз
+//     {
+//         deck[o] = offset[k];
+//         o++;
+//     }
+//     //Console.Write("\noffset deck: "); print_array(deck);
+
+//     for(k = 0; k < cut.Length; k++) // перепись колоды, постановка среза на верх колоды
+//     {
+//         deck[o] = cut[k];
+//         o++;
+//     }
+//     //Console.Write($"\ncut {i} done:"); print_array(deck);
+// }
+
+// Console.WriteLine($"\nTopdeck после {r} среза(ов): {deck[deck.Length-1]}.");
+
+// 25.01.23
+//////////////// 1
+// фибоначчи, лмао
+// Your task is to efficiently calculate the nth element in the Fibonacci sequence 
+// and then count the occurrence of each digit in the number. Return a list of integer pairs sorted in descending order.
+
+// https://www.codewars.com/kata/5779f894ec8832493f00002d/python
+
+int n; // искомое число фибоначчи
+while(true){
+    Console.Write("Введите искомое число фибоначчи(10 <= n <= 93):");
     n = Convert.ToInt32(Console.ReadLine());
-    if(1 <= n && n <= 50) break;
-    else Console.WriteLine("Размер введенной колоды уходит за заданные гранницы");
+    if(10 <= n && n <= 93) break;
+    else Console.WriteLine("неправильно");
 }
 
-int r;
-while(true)
+long[] f = new long[n]; f[0] = 0; f[1] = 1; 
+for(int i = 2; i < n; i++) f[i] = f[i-1] + f[i-2];
+long a = f[n-1]; // нахождение нужного числа
+
+Console.Write($"Искомое число фибоначчи: {a}.");// \nмассив: ");  print_string(f); 
+
+int[][] count = new int[2][];
+count[0] = new int[10] {0,1,2,3,4,5,6,7,8,9}; // массив индекслов, залупа
+count[1] = new int[10] {0,0,0,0,0,0,0,0,0,0}; // массив счета чисел
+
+string b = a.ToString(); // ,блять, я заебался,
+int[] numba = new int[b.Length];
+for(int i = 0; i < b.Length; i++) {numba[i] = int.Parse(b[i].ToString());}
+
+// Console.Write("\nЧисло рассусоленое: "); print_array(numba);
+
+for(int i = 0; i < 10; i++) // подсчет цифр в числе бляяяяяяяя
 {
-    Console.Write("Введите кол-во срезов (1 <= r <= 50): ");
-    r = Convert.ToInt32(Console.ReadLine());
-    if(1 <= r && r <= 50) break;
-    else Console.WriteLine("Кол-во срезов уходит за заданные гранницы");
+    for(int j = 0; j < numba.Length; j++)
+    {   
+        if(i == numba[j]) count[1][i]++;
+    }
 }
 
-int p; //с какой карты сверху начнется срез
-while(true)
+// Console.WriteLine("\nСколько каких чисел: ");print_jagged_r(count);
+
+// теперь надо сортировать, и, блять, я не ебу
+
+int[] temp = new int[2]; // для перестановки | 0 - индекс, 1 - сам счет
+for(int i = 9; i >= 0; i--) // сортировка пузырьcum, от наименьшего к большему
 {
-    Console.Write($"Введите с какой карты снизу начнется срез (1 <= p <= {n}, где 1 - дно колоды): ");
-    p = Convert.ToInt32(Console.ReadLine());
-    if(1 <= p && p <= n) break;
-    else Console.WriteLine("Номер карты уходит за заданные гранницы");
+    for(int j = 9; j > 0; j--)
+    {
+        if(count[1][j] > count[1][j-1])
+        {
+            temp[0] = count[0][j-1];        temp[1] = count[1][j-1];
+            count[0][j-1] = count[0][j];    count[1][j-1] = count[1][j];
+            count[0][j] = temp[0];          count[1][j] = temp[1];
+        }
+    }
 }
 
-int c; //кол-во карт в срезе
-while(true)
-{
-    Console.Write($"Введите кол-во карт в срезе (1 <= c <= {p}): ");
-    c = Convert.ToInt32(Console.ReadLine());
-    if(1 <= c && c <= n-p) break;
-    else Console.WriteLine("Кол-во карт уходит за заданные гранницы");
-}
-
-// Console.WriteLine($"n = {n}, r = {r}, p = {p}, c = {c}.");
-
-//n - размер, r - кол-во срезов, p - с какой карты сверху идет срез, c - кол-во карт в срезе
-
-int[] deck = new int[n]; // наша колода
-for(int i = 0; i < n; i++) deck[i] = i+1; // заполнение колоды
-
-int[] cut = new int[c]; // массив для среза
-int[] offset = new int[n-p]; // массив для перестановки сверху на место среза
-
-Console.WriteLine("Колода выглядит так: ");
-print_array(deck);
-Console.Write($", где 1 - дно колоды, {n} - верхушка.\n");
-Console.Write("=================================");
-
-int k = 0; // индекс для записи в сut и offset
-
-for(int i = 0; i < r; i++) // сам цикл, циклицться по кол-ву срезов(очевидно)
-{   
-    for(int j = p - c ; j < p ; j++) // запись в cut, снизу вверх
-    {
-        cut[k] = deck[j];
-        k++;
-    }
-    k = 0;
-    //Console.Write($"\ncut {i+1} "); print_array(cut);
-
-    for(int j = p; j <= n-1; j++) // запись в offset, тоже снизу вверх
-    {
-        offset[k] = deck[j];
-        k++;
-    }
-    int o = p - c;
-    //Console.Write($"\noffset "); print_array(offset);
-
-    for(k = 0; k < offset.Length; k++) // перепись самой колоды(перетасовка), запись карты выше среза вниз
-    {
-        deck[o] = offset[k];
-        o++;
-    }
-    //Console.Write("\noffset deck: "); print_array(deck);
-
-    for(k = 0; k < cut.Length; k++) // перепись колоды, постановка среза на верх колоды
-    {
-        deck[o] = cut[k];
-        o++;
-    }
-    //Console.Write($"\ncut {i} done:"); print_array(deck);
-}
-
-Console.WriteLine($"\nTopdeck после {r} среза(ов): {deck[deck.Length-1]}.");
+Console.WriteLine("\nОтсортировано: ");print_jagged_r(count);
