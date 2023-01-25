@@ -603,54 +603,79 @@ print_array(arr_sorted);
 
 // https://www.codewars.com/kata/5779f894ec8832493f00002d/python
 
-int n; // искомое число фибоначчи
-while(true){
-    Console.Write("Введите искомое число фибоначчи(10 <= n <= 93):");
-    n = Convert.ToInt32(Console.ReadLine());
-    if(10 <= n && n <= 93) break;
-    else Console.WriteLine("неправильно");
-}
+// int n; // искомое число фибоначчи
+// while(true){
+//     Console.Write("Введите искомое число фибоначчи(10 <= n <= 93):");
+//     n = Convert.ToInt32(Console.ReadLine());
+//     if(10 <= n && n <= 93) break;
+//     else Console.WriteLine("неправильно");
+// }
 
-long[] f = new long[n]; f[0] = 0; f[1] = 1; 
-for(int i = 2; i < n; i++) f[i] = f[i-1] + f[i-2];
-long a = f[n-1]; // нахождение нужного числа
+// long[] f = new long[n]; f[0] = 0; f[1] = 1; 
+// for(int i = 2; i < n; i++) f[i] = f[i-1] + f[i-2];
+// long a = f[n-1]; // нахождение нужного числа
 
-Console.Write($"Искомое число фибоначчи: {a}.");// \nмассив: ");  print_string(f); 
+// Console.Write($"Искомое число фибоначчи: {a}.");// \nмассив: ");  print_string(f); 
 
-int[][] count = new int[2][];
-count[0] = new int[10] {0,1,2,3,4,5,6,7,8,9}; // массив индекслов, залупа
-count[1] = new int[10] {0,0,0,0,0,0,0,0,0,0}; // массив счета чисел
+// int[][] count = new int[2][];
+// count[0] = new int[10] {0,1,2,3,4,5,6,7,8,9}; // массив индекслов, залупа
+// count[1] = new int[10] {0,0,0,0,0,0,0,0,0,0}; // массив счета чисел
 
-string b = a.ToString(); // ,блять, я заебался,
-int[] numba = new int[b.Length];
-for(int i = 0; i < b.Length; i++) {numba[i] = int.Parse(b[i].ToString());}
+// string b = a.ToString(); // ,блять, я заебался,
+// int[] numba = new int[b.Length];
+// for(int i = 0; i < b.Length; i++) {numba[i] = int.Parse(b[i].ToString());}
 
-// Console.Write("\nЧисло рассусоленое: "); print_array(numba);
+// for(int i = 0; i < 10; i++) // подсчет цифр в числе бляяяяяяяя
+// {
+//     for(int j = 0; j < numba.Length; j++)
+//     {   
+//         if(i == numba[j]) count[1][i]++;
+//     }
+// }
 
-for(int i = 0; i < 10; i++) // подсчет цифр в числе бляяяяяяяя
+// int[] temp = new int[2]; // для перестановки | 0 - индекс, 1 - сам счет
+// for(int i = 9; i >= 0; i--) // сортировка пузырьcum, от наименьшего к большему
+// {
+//     for(int j = 9; j > 0; j--)
+//     {
+//         if(count[1][j] > count[1][j-1])
+//         {
+//             temp[0] = count[0][j-1];        temp[1] = count[1][j-1];
+//             count[0][j-1] = count[0][j];    count[1][j-1] = count[1][j];
+//             count[0][j] = temp[0];          count[1][j] = temp[1];
+//         }
+//     }
+// }
+
+// Console.WriteLine("\nОтсортировано: ");print_jagged_r(count);
+
+//////////////// 2
+// удаление символов из строки
+
+// string stringi = "Petuhon";
+// int i;
+// while(stringi.Length != 0)
+// {
+//     Console.Write($"Дана строка {stringi}, введите число от 0 до {stringi.Length-1} для удаления символа из строки. \nВведите i < 0 чтобы выйти.");
+//     i = Convert.ToInt32(Console.ReadLine());
+//     if(i < 0) break;
+//     else if(i > stringi.Length-1) Console.WriteLine("Индекс символа уходит за границу, еблан.");
+//     else stringi = stringi.Remove(i,1);
+// }
+
+//////////////// 2
+// Написать прогу для проверки двух заданных целых чисел, каждое из которых находится в диапазоне 10..99. 
+// Возвращает значение true, если в обоих числах появляется цифра, например 3 в 13 и 33 
+int a, b;
+while(true)
 {
-    for(int j = 0; j < numba.Length; j++)
-    {   
-        if(i == numba[j]) count[1][i]++;
-    }
+    Console.WriteLine("Введите первое число(10-99): ");
+    a = Convert.ToInt32(Console.ReadLine());
+    if(a > 9 && a < 100) break;
 }
-
-// Console.WriteLine("\nСколько каких чисел: ");print_jagged_r(count);
-
-// теперь надо сортировать, и, блять, я не ебу
-
-int[] temp = new int[2]; // для перестановки | 0 - индекс, 1 - сам счет
-for(int i = 9; i >= 0; i--) // сортировка пузырьcum, от наименьшего к большему
+while(true)
 {
-    for(int j = 9; j > 0; j--)
-    {
-        if(count[1][j] > count[1][j-1])
-        {
-            temp[0] = count[0][j-1];        temp[1] = count[1][j-1];
-            count[0][j-1] = count[0][j];    count[1][j-1] = count[1][j];
-            count[0][j] = temp[0];          count[1][j] = temp[1];
-        }
-    }
+    Console.WriteLine("Введите второ число: ");
+    b = Convert.ToInt32(Console.ReadLine());
+    if(b > 9 && b < 100) break;
 }
-
-Console.WriteLine("\nОтсортировано: ");print_jagged_r(count);
