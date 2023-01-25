@@ -495,13 +495,29 @@ for(int i = 0; i < r; i++) // сам цикл, циклицться по кол-
         k++;
     }
     k = 0;
-    Console.Write($"\ncut {i+1} "); print_array(cut);
+    //Console.Write($"\ncut {i+1} "); print_array(cut);
 
     for(int j = p; j <= n-1; j++) // запись в offset, тоже снизу вверх
     {
         offset[k] = deck[j];
         k++;
     }
-    k = 0;
-    Console.Write($"\noffset "); print_array(offset);
+    int o = p - c;
+    //Console.Write($"\noffset "); print_array(offset);
+
+    for(k = 0; k < offset.Length; k++) // перепись самой колоды(перетасовка), запись карты выше среза вниз
+    {
+        deck[o] = offset[k];
+        o++;
+    }
+    //Console.Write("\noffset deck: "); print_array(deck);
+
+    for(k = 0; k < cut.Length; k++) // перепись колоды, постановка среза на верх колоды
+    {
+        deck[o] = cut[k];
+        o++;
+    }
+    //Console.Write($"\ncut {i} done:"); print_array(deck);
 }
+
+Console.WriteLine($"\nTopdeck после {r} среза(ов): {deck[deck.Length-1]}.");
