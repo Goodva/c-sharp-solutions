@@ -4,6 +4,28 @@ namespace ConsoleApp1
 {
     public class Program
     {
+        static int DigitMult(int a)
+        {
+            int num = a, length = (a.ToString()).Length;
+            int result = 1;
+            for (int i = 0; i < length; i++)
+            {
+                result *= num % 10; num /= 10;
+            }
+            return result;
+        }
+
+        static long MultRange(int a, int b)
+        {
+            if (a == b) return a;
+            long result = a;
+            for(int i = a+1; i <= b; i++)
+            {
+                result *= i;
+            }
+            return result;
+        }
+
         class Person
         {
             public string name = "Зубенко Михаил Петровичъ";
@@ -39,6 +61,57 @@ namespace ConsoleApp1
             }
         }
 
+        class Borgar
+        {
+            public string name = "borgar сеньйор";                      //имя
+            public double price = 119.99;                       //цена
+            public int mass = 200;                              //масса, в граммах
+            public int[] cont = new int[4] {200, 10, 7, 9};     //КБЖУ на 100г: ККал, белки, жир, углеводы
+
+            public void print()
+            {
+                Console.WriteLine($"Название предмета в меню: {name}");
+                Console.WriteLine($"Цена: {price}руб");
+                Console.WriteLine($"Масса нет.: {mass}г.");
+                Console.WriteLine($"КБЖУ на 100г:\n-Ккал: {cont[0]};\n-Белки: {cont[1]};\n-Жир: {cont[2]};\n-Углеводы: {cont[3]}.");
+            }
+            
+            public Borgar()
+            {
+                this.name = "borgar джун";
+                this.price = 119.99;
+                this.mass = 200;
+                this.cont[0] = 200; this.cont[1] = 10; this.cont[2] = 7; this.cont[3] = 9;
+        }
+
+            public Borgar(string name, double price, int mass, int[] cont)
+            {
+                this.name = name;
+                this.price = price;
+                this.mass = mass;
+                this.cont = cont;
+            }
+            public Borgar(string name) : this()
+            {
+                this.name = name;
+            }
+
+            public Borgar(double price) : this()
+            {
+                this.price = price;
+            }
+
+            public Borgar(int mass) : this()
+            {
+                this.mass = mass;
+            }
+
+            public Borgar(int[] cont) : this()
+            {
+                this.cont = cont;
+            }
+        }
+        
         struct Shpala
         {
             public int height, width;
@@ -61,32 +134,14 @@ namespace ConsoleApp1
         public static void Main(string[] args)
         {
             /*
-            Person p = new Person();
-            p.Print();
-
-            p.age = 96; p.name = "suka yeblivaya";
-            p.Print();
+            Borgar burger = new Borgar(); burger.print();
+            int[] cont = { 400, 3, 300, 228 }; Console.WriteLine("===================");
+            Borgar senior = new Borgar("Бургер Сеньйор", 199.99, 240, cont);    senior.print();
             */
-
-            /*
-            Person Vitalya = new Person(); Vitalya.Print();
-            Person noName = new Person(40); noName.Print();
-            Person noAge = new Person("Дима"); noAge.Print();
-            Person ZMP = new Person("Зубенко Михаил Петрович", 56); ZMP.Print();
-            */
-
-            Shpala shp = new Shpala();
-            shp.height = 11; shp.width = 6;
-
-            Shpala shpala = new();
-
-            Shpala shpala1 = new Shpala(10);
-            Shpala shpala2 = new Shpala(10, 6);
-
-            shp.print();
-            shpala.print();
-            shpala1.print();
-            shpala2.print();
+            int a = 1;
+            int b = 40;
+            //Console.WriteLine($"ввод: {a}; вывод: {DigitMult(a)}");
+            Console.WriteLine($"Ввод: {a}, {b}; Вывод: {MultRange(a, b)}");
         }
     }
 }
