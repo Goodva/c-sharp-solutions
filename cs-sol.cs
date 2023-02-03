@@ -130,6 +130,7 @@ namespace ConsoleApp1
                 height = h;
             }
         }
+
         static void print_2d(int[,] a)
         {
             int rows = a.GetUpperBound(0) + 1;
@@ -144,6 +145,7 @@ namespace ConsoleApp1
                 Console.WriteLine();
             }
         }
+
         static void fuckingElves(int m, int n, int l, int t)
         {
             int[,] a = new int[m, n];
@@ -167,6 +169,202 @@ namespace ConsoleApp1
                 Console.WriteLine($"При введенных данных, пажилому из чата задонатили {summ} секунд, ни секунды не было потеряно из-за говнокода");
         }
 
+        class Weapon
+        {
+            private string _name;         //название в файлах типо
+            private string _name_loc;     //локализированое название
+            private int _id;           //айдишник
+            private int _dmg;             //урон
+            private double _dmg_var;      //разброс урона, в процентах. т.е. если расброс 25%, то писать суда 0.25
+            private int _rof;             //выстрелов в минуту
+            private double _crit;         //шанс крита, так же как и с расбросом урона
+            private bool _is_auto;        //автоматическое оружие или нет
+
+            public Weapon()
+            {
+                this._name = "ak";
+                this._name_loc = "AK-74";
+                this._id = 000000;
+                this._dmg = 39;
+                this._dmg_var = 0.1;
+                this._rof = 600;
+                this._crit = 0.1;
+                this._is_auto = true;
+            }
+
+            public Weapon(string _name, string _name_loc, int _id, int _dmg, double _dmg_var, int _rof, double _crit, bool _is_auto)
+            {
+                this._name = _name;
+                this._name_loc = _name_loc;
+                this._id = _id;
+                this._dmg = _dmg;
+                this._dmg_var = _dmg_var;
+                this._rof = _rof;
+                this._crit = _crit;
+                this._is_auto = _is_auto;
+            }
+
+            public string Name
+            {
+                get { return _name; }
+                set { _name = value; }
+            }
+
+            public string Name_loc
+            {
+                get { return _name_loc; }
+                set { _name_loc = value; }
+            }
+
+            public int Id
+            {
+                get { return _id; }
+                set { _id = value; }
+            }
+
+            public int Dmg
+            {
+                get { return _dmg; }
+                set { _dmg = value; }
+            }
+
+            public double Dmg_var
+            {
+                get { return _dmg_var; }
+                set { _dmg_var = value; }
+            }
+
+            public int Rof
+            {
+                get { return _rof; }
+                set { _rof = value; }
+            }
+
+            public double Crit
+            {
+                get { return _crit; }
+                set { _crit = value; }
+            }
+
+            public bool Is_auto
+            {
+                get { return _is_auto; }
+                set { _is_auto = value; }
+            }
+
+            public virtual void print()
+            {
+                Console.WriteLine($"{_name_loc}|ID: {_id}");
+                Console.WriteLine($"Урон: {_dmg-_dmg*_dmg_var} - {_dmg + _dmg * _dmg_var}");
+                Console.WriteLine($"Шанс крита: {_crit * 100}%");
+                Console.Write($"Темп стрельбы: {_rof}, ");
+                if (_is_auto) Console.WriteLine($"Автоматический\n");
+                else Console.WriteLine($"Полу-автоматический\n");
+            }
+        }
+
+        class Shotgun : Weapon
+        {
+            private string _name;           //название в файлах типо
+            private string _name_loc;       //локализированое название
+            private int _id;                //айдишник
+            private int _dmg;               //урон
+            private double _dmg_var;        //разброс урона, в процентах. т.е. если расброс 25%, то писать суда 0.25
+            private int _pellets;           //кол-во дроби
+            private int _rof;               //выстрелов в минуту
+            private double _crit;           //шанс крита, так же как и с расбросом урона
+            private bool _is_auto;          //автоматическое оружие или нет
+
+            public Shotgun()
+            {
+                this._name = "spas12";
+                this._name_loc = "SPAS-12";
+                this._id = 000000;
+                this._dmg = 10;
+                this._pellets = 12;
+                this._dmg_var = 0.1;
+                this._rof = 600;
+                this._crit = 0.1;
+                this._is_auto = true;
+            }
+
+            public Shotgun(string _name, string _name_loc, int _id, int _dmg, int _pellets, double _dmg_var, int _rof, double _crit, bool _is_auto)
+            {
+                this._name = _name;
+                this._name_loc = _name_loc;
+                this._id = _id;
+                this._dmg = _dmg;
+                this._pellets = _pellets;
+                this._dmg_var = _dmg_var;
+                this._rof = _rof;
+                this._crit = _crit;
+                this._is_auto = _is_auto;
+            }
+
+            public int Pellets
+            {
+                get { return _pellets; }
+                set { _pellets = value; }
+            }
+
+            public override void print()
+            {
+                Console.WriteLine($"{_name_loc}|ID: {_id}");
+                Console.WriteLine($"Урон: {_dmg - _dmg * _dmg_var}*{_pellets} - {_dmg + _dmg * _dmg_var}*{_pellets}");
+                Console.WriteLine($"Шанс крита: {_crit * 100}%");
+                Console.Write($"Темп стрельбы: {_rof}, ");
+                if (_is_auto) Console.WriteLine($"Автоматический\n");
+                else Console.WriteLine($"Полу-автоматический\n");
+            }
+        }
+
+        class PhotoBook
+        {
+            private int _numPages;
+
+            public PhotoBook()
+            {
+                this._numPages = 16;
+            }
+
+            public PhotoBook(int _numPages)
+            {
+                this._numPages = _numPages;
+            }
+
+            public int NumPages
+            {
+                get { return _numPages; }
+                set { _numPages = value; }
+            }
+
+            public virtual int GetNumPages()
+            {
+                return _numPages;
+            }
+        }
+
+        class BigPhotoBook : PhotoBook
+        {
+            private int _numPages;
+
+            public int NumPages
+            {
+                get { return _numPages; }
+                set { _numPages = value; }
+            }
+
+            public BigPhotoBook()
+            {
+                this._numPages = 64;
+            }
+
+            public override int GetNumPages()
+            {
+                return _numPages;
+            }
+        }
+
         public static void Main(string[] args)
         {
             /*
@@ -188,7 +386,34 @@ namespace ConsoleApp1
             //посчитать сумму матрицы после потери??? если сумма больше лимита, вычитается лимит лол
             //если член матрицы меньше или равен L, то с него донат не вычитаеться с него
 
-            fuckingElves(5, 8, 1, 100);
+            //fuckingElves(5, 8, 1, 100);
+
+
+            //03.02.23
+            //дрочка с классами
+            /*
+            Weapon ak = new Weapon();
+            ak.print();
+
+            Weapon pistol = new Weapon("glock", "Glock 17", 000002, 25, 0.5, 450, 0.15, false);
+            pistol.print();
+
+            pistol.Name = "1911"; pistol.Name_loc = "M1911"; pistol.Rof = 150; pistol.Crit = 0.1; pistol.Dmg = 30;
+            pistol.print();
+
+            Shotgun spas = new Shotgun();
+            spas.Id = 3;
+            spas.print();
+            */
+
+            PhotoBook book1 = new PhotoBook();
+            Console.WriteLine(book1.GetNumPages());
+
+            BigPhotoBook book2 = new BigPhotoBook();
+            Console.WriteLine(book2.GetNumPages());
+
+            PhotoBook bookCustom = new PhotoBook(24);
+            Console.WriteLine(bookCustom.GetNumPages());
         }
     }
 }
