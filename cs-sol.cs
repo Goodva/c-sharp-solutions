@@ -365,6 +365,37 @@ namespace ConsoleApp1
             }
         }
 
+        class Vigenere
+        {
+            private char[] alphabet;
+
+            public Vigenere()
+            {
+                this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+            }
+            
+            public string encrypt_en(string msg, string key)
+            {
+                msg = msg.ToUpper();
+                key = key.ToUpper();
+                
+                int i = 0;
+
+                string result = "";
+
+                foreach(char symbol in msg)
+                {
+                    int c = (Array.IndexOf(alphabet, symbol) + Array.IndexOf(alphabet, key[i])) % alphabet.Length;
+                    result += c;
+                    i++;
+                    if ((i + 1) == key.Length) i = 0;
+                }
+
+                return result;
+            }
+
+        }
+
         public static void Main(string[] args)
         {
             /*
@@ -404,7 +435,7 @@ namespace ConsoleApp1
             Shotgun spas = new Shotgun();
             spas.Id = 3;
             spas.print();
-            */
+            
 
             PhotoBook book1 = new PhotoBook();
             Console.WriteLine(book1.GetNumPages());
@@ -414,6 +445,17 @@ namespace ConsoleApp1
 
             PhotoBook bookCustom = new PhotoBook(24);
             Console.WriteLine(bookCustom.GetNumPages());
+            */
+
+            //08.02.23
+            //шифр виженера
+            //дается слово для кодировки и ключ
+            //пускай будет "SECRET" и "ABC"
+            // 
+
+            string message = "amogus at dawn", key = "lemonade";
+            Vigenere V = new Vigenere();
+            Console.WriteLine(V.encrypt_en(message,key));
         }
     }
 }
