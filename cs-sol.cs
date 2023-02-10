@@ -150,11 +150,11 @@ namespace ConsoleApp1
         {
             int[,] a = new int[m, n];
             int summ = 0;
-            for(int i = 0; i < m; i++)
+            for (int i = 0; i < m; i++)
             {
                 for (int j = 0; j < n; j++)
                 {
-                    a[i, j] = i^j;
+                    a[i, j] = i ^ j;
                     a[i, j] -= l;
                     if (a[i, j] < 0) a[i, j] = 0;
                     summ += a[i, j];
@@ -255,7 +255,7 @@ namespace ConsoleApp1
             public virtual void print()
             {
                 Console.WriteLine($"{_name_loc}|ID: {_id}");
-                Console.WriteLine($"Урон: {_dmg-_dmg*_dmg_var} - {_dmg + _dmg * _dmg_var}");
+                Console.WriteLine($"Урон: {_dmg - _dmg * _dmg_var} - {_dmg + _dmg * _dmg_var}");
                 Console.WriteLine($"Шанс крита: {_crit * 100}%");
                 Console.Write($"Темп стрельбы: {_rof}, ");
                 if (_is_auto) Console.WriteLine($"Автоматический\n");
@@ -373,17 +373,17 @@ namespace ConsoleApp1
             {
                 this.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
             }
-            
+
             public string encrypt_en(string msg, string key)
             {
                 msg = msg.ToUpper();
                 key = key.ToUpper();
-                
+
                 int i = 0;
 
                 string result = "";
 
-                foreach(char symbol in msg)
+                foreach (char symbol in msg)
                 {
                     int c = (Array.IndexOf(alphabet, symbol) + Array.IndexOf(alphabet, key[i])) % alphabet.Length;
                     result += c;
@@ -394,6 +394,44 @@ namespace ConsoleApp1
                 return result;
             }
 
+        }
+
+        static bool FindDuck(string a)
+        {
+            a = a.ToLower();
+            while (true)
+            {
+                int b = a.IndexOf('d');
+                switch (b)
+                {
+                    case -1:
+                        return false;
+
+                    default:
+                        if (a[b + 1] == 'u' && a[b + 2] == 'c' && a[b + 3] == 'k') return true;
+                        else a = a.Remove(b, 1);
+                        break;
+                }
+            }
+        }
+
+        static string Uncensor(string word, string missing)
+        {
+            char[] _word = word.ToCharArray();
+            char[] _missing = missing.ToCharArray();
+            int i = 0;
+            while (true)
+            {
+                int a = word.IndexOf('*');
+                if (a != -1)
+                {
+                    _word[a] = _missing[i];
+                    word = _word.ToString();
+                    i++;
+                }
+                else break;
+            }
+            return word;
         }
 
         public static void Main(string[] args)
@@ -452,10 +490,31 @@ namespace ConsoleApp1
             //дается слово для кодировки и ключ
             //пускай будет "SECRET" и "ABC"
             // 
-
+            /*
             string message = "amogus at dawn", key = "lemonade";
             Vigenere V = new Vigenere();
-            Console.WriteLine(V.encrypt_en(message,key));
+            Console.WriteLine(V.encrypt_en(message, key));
+            */
+            //10.02.23
+            //задание 1, найти слово в строке
+
+            /*
+            string a = "dis' is a duck";
+            if (FindDuck(a))
+            {
+                Console.WriteLine("Utka");
+            }
+            else Console.WriteLine("net utki");
+            */
+
+            //задание 2, разцензурить слово
+            // дается строка, зацензуреная звездочками(*)
+            //дается еще одна строка, с зацензуринами символами
+            // вернуть строке изночальное состояние
+
+            string word = "П*****с", removed = "идора";
+            word = Uncensor(word, removed);
+            Console.WriteLine(word);
         }
     }
 }
