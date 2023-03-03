@@ -386,7 +386,7 @@ namespace ConsoleApp1
                 foreach (char symbol in msg)
                 {
                     int c = (Array.IndexOf(alphabet, symbol) + Array.IndexOf(alphabet, key[i])) % alphabet.Length;
-                    result += c;
+                    result += alphabet[c];
                     i++;
                     if ((i + 1) == key.Length) i = 0;
                 }
@@ -432,6 +432,86 @@ namespace ConsoleApp1
                 else break;
             }
             return word;
+        }
+
+        interface iAnimal
+        {
+            void animalSound();
+        }
+
+        class Hohol : iAnimal 
+        {
+            public void animalSound()
+            {
+                Console.WriteLine("Хохол требует леопардов...");
+            }
+        }
+
+        interface iVehicle
+        {
+            void Drive();
+            bool Refuel();
+        }
+
+        class Car : iVehicle
+        {
+            private int Fuel;
+
+            public Car(int fuel)
+            {
+                Fuel = fuel;
+            }
+
+            public void Drive()
+            {
+                if (Fuel > 0) Console.WriteLine("В движнии");
+                else Console.WriteLine("Статичен");
+            }
+
+            public bool Refuel()
+            {
+                if (Fuel > 0) return true;
+                else return false;
+            }
+        }
+
+        enum Months
+        {
+            Jan,
+            Feb,
+            Mar,
+            Apr,
+            May,
+            Jun,
+            Jul,
+            Aug,
+            Sep,
+            Oct,
+            Nov,
+            Dec
+        }
+
+        enum chest_state
+        {
+            Open,
+            Closed,
+            Locked
+        }
+
+        static int pentagonal(int a)
+        {
+            /*
+            a = 1; num = 1
+            a = 2; num = 6
+            a = 3; num = 16
+            a = 4; num = 31
+            */
+            int num = 1;
+            for(int i = 0; i < a; i++)
+            {
+                num += i * 5;
+            }
+            return num;
         }
 
         public static void Main(string[] args)
@@ -511,10 +591,63 @@ namespace ConsoleApp1
             // дается строка, зацензуреная звездочками(*)
             //дается еще одна строка, с зацензуринами символами
             // вернуть строке изночальное состояние
-
+            /*
             string word = "П*****с", removed = "идора";
             word = Uncensor(word, removed);
             Console.WriteLine(word);
+            */
+
+            //17.02.23
+            //интерфейсы
+            // Hohol pig = new Hohol();
+            // pig.animalSound();
+
+            //03.03.23
+
+            //int month = (int)Months.Mar;
+            //Console.WriteLine(month);
+
+
+            //задача 1
+            //дрочка с сундуком, задача в презентации в группе
+            /*
+            int state = (int)chest_state.Open;
+            int s;
+            while(true)
+            {
+                switch (state)
+                {
+                    case (int)chest_state.Open:
+                        Console.Write("Сундук открыт. Что вы хотите сделать?(номер состояния) ");
+                        s = Convert.ToInt32(Console.ReadLine());
+                        if (s == 1) state++;
+                        break;
+
+                    case (int)chest_state.Closed:
+                        Console.Write("Сундук закрыт. Что вы хотите сделать?(номер состояния) ");
+                        s = Convert.ToInt32(Console.ReadLine());
+                        if (s == 2) state = (int)chest_state.Locked;
+                        else if (s == 0) state = (int)chest_state.Open;
+                        break;
+
+                    case (int)chest_state.Locked:
+                        Console.Write("Сундук заперт. Что вы хотите сделать?(номер состояния) ");
+                        s = Convert.ToInt32(Console.ReadLine());
+                        if (s == 1) state = (int)chest_state.Closed;
+                        break;
+
+                }
+            }
+            */
+
+            //задача 2
+            //Напишите функцию, которая принимает положительное целое число и вычисляет, сколько точек существует в пятиугольной форме вокруг центральной точки на N-й итерации.
+            //Первая итерация представляет собой только одну точку. На втором — 6 точек. На третьей — 16 точек, а на четвертой — 31 точка.
+
+            Console.WriteLine(pentagonal(1));
+            Console.WriteLine(pentagonal(2));
+            Console.WriteLine(pentagonal(3));
+            Console.WriteLine(pentagonal(5));
         }
     }
 }
